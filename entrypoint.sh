@@ -36,13 +36,13 @@ Argo_xray_vmess="vmess://$(echo -n "\
 \"net\": \"ws\",\
 \"type\": \"none\",\
 \"host\": \"${ARGO}\",\
-\"path\": \"/$uuid-vm\",\
+\"path\": \"/vm\",\
 \"tls\": \"tls\",\
 \"sni\": \"${ARGO}\"\
 }"\
     | base64 -w 0)" 
-Argo_xray_vless="vless://${uuid}@${ARGO}:443?encryption=none&security=tls&sni=$ARGO&type=ws&host=${ARGO}&path=/$uuid-vl#Argo_xray_vless"
-Argo_xray_trojan="trojan://${uuid}@${ARGO}:443?security=tls&type=ws&host=${ARGO}&path=/$uuid-tr&sni=$ARGO#Argo_xray_trojan"
+Argo_xray_vless="vless://${uuid}@${ARGO}:443?encryption=none&security=tls&sni=$ARGO&type=ws&host=${ARGO}&path=/vl#Argo_xray_vless"
+Argo_xray_trojan="trojan://${uuid}@${ARGO}:443?security=tls&type=ws&host=${ARGO}&path=/tr&sni=$ARGO#Argo_xray_trojan"
 
 cat > log << EOF
 ****************************************************************
@@ -65,7 +65,7 @@ http端口：可选80、8080、8880、2052、2082、2086、2095，tls必须关�
 uuid：$uuid
 传输协议：ws
 host/sni：$ARGO
-path路径：/$uuid-vm
+path路径：/vm
 
 分享链接如下（默认443端口、tls开启，服务器地址可更改为自选IP）
 ${Argo_xray_vmess}
@@ -78,7 +78,7 @@ http端口：可选80、8080、8880、2052、2082、2086、2095，tls必须关�
 uuid：$uuid
 传输协议：ws
 host/sni：$ARGO
-path路径：/$uuid-vl
+path路径：/vl
 
 分享链接如下（默认443端口、tls开启，服务器地址可更改为自选IP）
 ${Argo_xray_vless}
@@ -91,7 +91,7 @@ http端口：可选80、8080、8880、2052、2082、2086、2095，tls必须关�
 密码：$uuid
 传输协议：ws
 host/sni：$ARGO
-path路径：/$uuid-tr
+path路径：/tr
 
 分享链接如下（默认443端口、tls开启，服务器地址可更改为自选IP）
 ${Argo_xray_trojan}
@@ -105,7 +105,7 @@ http端口：可选80、8080、8880、2052、2082、2086、2095，tls必须关�
 加密方式：chacha20-ietf-poly1305
 传输协议：ws
 host/sni：$ARGO
-path路径：/$uuid-ss
+path路径：/ss
 
 ----------------------------------------------------------------
 5：Socks+ws+tls配置明文如下，相关参数可复制到客户端
@@ -116,7 +116,7 @@ http端口：可选80、8080、8880、2052、2082、2086、2095，tls必须关�
 密码：$uuid
 传输协议：ws
 host/sni：$ARGO
-path路径：/$uuid-so
+path路径：/so
 
 ----------------------------------------------------------------
 如当前环境支持shell，输入cat log查看当前配置信息
